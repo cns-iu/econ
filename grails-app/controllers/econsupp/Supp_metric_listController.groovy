@@ -9,7 +9,7 @@ class Supp_metric_listController {
 		Integer metric_idParam = params.int("metric_id")
 		String metric_nameParam = params.metric_name
 		String metric_descParam = params.metric_desc
-		Boolean use_averageParam = params.use_average
+		Boolean displayParam = params.display
 
 		def obj = [:]
 		obj['records'] = [:]
@@ -17,7 +17,7 @@ class Supp_metric_listController {
 			[ "name": "metric_id","type": "numeric"],  
 			[ "name": "metric_name","type": "string"],
 			[ "name": "metric_desc","type": "string"],
-			[ "name": "use_average","type": "string"]
+			[ "name": "display","type": "string"]
 		]
 		obj['records']['data'] = Supp_metric_list.list(params);
 		println Supp_metric_list.list(params);

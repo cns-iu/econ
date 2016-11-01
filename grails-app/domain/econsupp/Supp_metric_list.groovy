@@ -4,7 +4,7 @@ class Supp_metric_list {
 	Integer metric_id
 	String metric_name
 	String metric_desc
-	Boolean use_average
+	Boolean display
 
 	static mapping = {
 		version false
