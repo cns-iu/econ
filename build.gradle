@@ -70,3 +70,7 @@ assets {
     minifyJs = true
     minifyCss = true
 }
+
+war {
+    archiveName 'econsupp-service.war'
+}
