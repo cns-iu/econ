@@ -16,6 +16,10 @@ class Medline_author {
 	Integer file_number
 	String authority_id
 
+	static mapping = {
+		datasource 'adminds'
+	}
+
     static constraints = {
     	version false
 		id insert: 'false', update: 'false'

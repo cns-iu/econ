@@ -15,7 +15,23 @@ class Met_sumsController {
 			["name": "use_average", "type": "string"]
 		]
 
-		obj['records']['data'] = Metric_sums.list(params);
+		println (new Date()[Calendar.YEAR])
+
+		def minYear = 1900
+		if (params.int("pub_year_min")) {
+			minYear = params.int("pub_year_min")
+		}
+
+		def maxYear = new Date()[Calendar.YEAR]
+		if (params.int("pub_year_max")) {
+			maxYear = params.int("pub_year_max")
+		}
+
+		obj['records']['data'] = Metric_sums.createCriteria().list {
+			between("pub_year", minYear, maxYear)
+		};
+
+		// obj['records']['data'] = Metric_sums.list(params);
 		render obj as JSON
 
     }
