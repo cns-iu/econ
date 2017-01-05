@@ -10,6 +10,8 @@ class Journal_listController {
     def index() { 
 		Integer computed_rankParam = params.int("computed_rank")
 		Integer subd_idParam = params.int("subd_id")
+		Integer minPubYearParam = params.int("pub_year_min")
+		Integer maxPubYearParam = params.int("pub_year_max")
 		String metric_idParam = params.metric_id
 		Integer limitParam = params.int("limit")
 		List<String> metric_idList = metric_idParam.split(",");
@@ -26,6 +28,18 @@ class Journal_listController {
 				continue;
 			}	
 		}
+
+		String pubYearMinQueryString = "";
+		if (minPubYearParam) {
+			pubYearMinQueryString = "AND a.pub_year >= " + minPubYearParam + " ";
+		}
+		String pubYearMaxQueryString = "";
+		if (maxPubYearParam) {
+			pubYearMaxQueryString = "AND a.pub_year <= " + maxPubYearParam + " ";
+		}
+		
+
+
 		metricIDQueryString = metricIDQueryString[0..-4] + ") "
 		if (validMetrics == 0) {
 			metricIDQueryString = "";
@@ -36,6 +50,8 @@ class Journal_listController {
 			"WHERE a.computed_rank<:comprank " +
 			"AND a.subd_id = :subdid " +
 			metricIDQueryString + 
+			pubYearMinQueryString +
+			pubYearMaxQueryString +
 			"AND b.pmid = a.pmid " +
 			"AND a.pmid = c.pmid " +
 			"AND c.author_rank = 1 " + 
