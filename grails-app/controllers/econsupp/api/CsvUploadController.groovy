@@ -9,10 +9,9 @@ import org.hibernate.*
 class CsvUploadController {
 	def sessionFactory
     def index() { 
-		def reqPart = request.getPart("csv")
-    	def inStream = reqPart.inputStream
+		def file = request.getFile("file")
+    	def inStream = file.inputStream
 
-    	def i = 0;
     	def errors = 0;
     	def firstError = -1;
 
@@ -20,6 +19,7 @@ class CsvUploadController {
 		obj['message'] = "Success"
     	//TODO: Validate CSV schema (Assume split,[0] == pmid on first line)
     	def skip = false;
+    	def i = 0;
 		inStream.splitEachLine(',') { line ->
 			if (i == 0) {
 				if (line[0] == "pmid") {
@@ -41,6 +41,7 @@ class CsvUploadController {
 					}
 				}
 			}
+			i += 1
 		}
 
 
