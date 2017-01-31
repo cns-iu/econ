@@ -6,10 +6,11 @@ import grails.rest.*
 class Metric_sums implements Serializable {
 	Integer subd_id
 	Integer pub_year
-	String metric_name
+	Integer metric_id
+//	String metric_name
 	Float metric_sum
 	Float metric_count
-	Boolean use_average
+//	Boolean use_average
     static mapping = {
 		datasource 'adminds'
 		version false
