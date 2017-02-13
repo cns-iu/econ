@@ -12,7 +12,7 @@ class Supp_metric_rank implements Serializable{
 	Integer pub_year
 
 	static mapping = {
-		datasource 'adminds'
+		datasource 'dataSource_adminds'
 		version false
 		id composite: ['subd_id', 'pub_year', 'metric_id'], insert: 'false', update: 'false'
 	}
