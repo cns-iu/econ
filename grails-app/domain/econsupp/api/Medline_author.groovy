@@ -17,7 +17,7 @@ class Medline_author {
 	String authority_id
 
 	static mapping = {
-		datasource 'dataSource_adminds'
+		datasource 'admin'
 	}
 
     static constraints = {

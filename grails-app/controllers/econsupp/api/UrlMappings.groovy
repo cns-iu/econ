@@ -18,6 +18,7 @@ class UrlMappings {
         "/met_sums"(controller: "met_sums")
         "/met_rank"(controller: "met_rank")
         "/metric_update"(controller: "metric_update")
+        "/compute_derived"(controller: "ComputeDerived")
 
         
     }

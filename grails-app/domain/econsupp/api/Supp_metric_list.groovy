@@ -10,7 +10,7 @@ class Supp_metric_list {
 	Boolean display
 
 	static mapping = {
-		datasource 'dataSource_adminds'		
+		datasource 'admin'		
 		version false
 		table 'supp_metric_list'
 		id name: 'metric_id', column: 'metric_id', generator: 'assigned', type: 'Integer', insert: 'false', update: 'false'

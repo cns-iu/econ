@@ -9,7 +9,7 @@ class Supp_metric_data implements Serializable {
 	Float metric
 
 	static mapping = {
-		datasource 'dataSource_adminds'		
+		datasource 'admin'		
 		version false
 		table 'supp_metric_data'
 	    id composite: ['pmid', 'metric_id'], insert: 'false', update: 'false'

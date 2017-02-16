@@ -11,7 +11,7 @@ class Medline_master {
 
 	static mapping = {
 		version false
-		datasource 'dataSource_adminds'
+		datasource 'admin'
 	}
 
     static constraints = {

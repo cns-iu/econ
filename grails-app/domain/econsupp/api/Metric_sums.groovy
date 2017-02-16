@@ -12,7 +12,7 @@ class Metric_sums implements Serializable {
 	Float metric_count
 //	Boolean use_average
     static mapping = {
-		datasource 'dataSource_adminds'
+		datasource 'admin'
 		version false
 		id composite: ['subd_id', 'pub_year', 'metric_id'], insert: 'false', update: 'false'
     }

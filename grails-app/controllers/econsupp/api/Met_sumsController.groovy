@@ -14,15 +14,12 @@ class Met_sumsController {
 			["name": "metric_count", "type": "numeric"],
 			// ["name": "use_average", "type": "string"]
 		]
-
-		println (new Date()[Calendar.YEAR])
-
 		def minYear = 1959
 		if (params.int("pub_year_min")) {
 			minYear = params.int("pub_year_min")
 		}
 
-		def maxYear = 2016
+		def maxYear = new Date()[Calendar.YEAR]
 		if (params.int("pub_year_max")) {
 			maxYear = params.int("pub_year_max")
 		}

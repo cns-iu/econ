@@ -1,20 +1,18 @@
 package econsupp.api
 
 
-import grails.rest.*
-import grails.converters.*
 import groovy.sql.Sql
+import grails.rest.*
+import javax.annotation.Resource
+
+
 
 
 class Metric_updateController {
-
-	def dataSource
-	def dataSource_adminds
+	@Resource(name = "dataSource_admin")
+	def adminDataSource
     def index() { 
-    	println(dataSource)
-    	println(dataSource_adminds)
-		def sql = new Sql(dataSource_adminds)
-		
+		def sql = new Sql(adminDataSource)
 		def sqlQuery = 'DROP TABLE IF EXISTS supp_metric_rank;' +
 			'CREATE TABLE supp_metric_rank(pmid CHARACTER VARYING, adj_metric NUMERIC, metric_id INTEGER, subd_id INTEGER, pub_year INTEGER, computed_rank INTEGER);' +
 			'INSERT INTO supp_metric_rank SELECT a.pmid, a.metric*b.jfraction AS adj_metric, a.metric_id, b.subd_id, c.pub_year, rank() OVER(PARTITION BY a.metric_id, b.subd_id, c.pub_year ORDER BY a.metric*b.jfraction DESC) FROM supp_metric_data a, journ_mapping b, medline_master c, medline_journals d WHERE a.pmid= c.pmid AND c.journal_nlmuniqueid = d.journal_nlmuniqueid AND d.journ_id = b.journ_id;' +
@@ -29,7 +27,7 @@ class Metric_updateController {
 			'GRANT SELECT ON metric_counts TO econ_supp_admin;'
 
 		sql.executeUpdate(sqlQuery);
-
-		render {}
+		sql.close();
+		render "Done"
 	}
 }

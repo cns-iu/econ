@@ -67,8 +67,11 @@ dependencies {
     runtime "com.h2database:h2"
     runtime "org.postgresql:postgresql:9.4.1208.jre7"
     testCompile "org.grails:grails-plugin-testing"
+    runtime "org.grails.plugins:hibernate4"
+    runtime "org.hibernate:hibernate-ehcache"
     testCompile "org.grails.plugins:geb"
     testCompile "org.grails:grails-datastore-rest-client"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 }
+

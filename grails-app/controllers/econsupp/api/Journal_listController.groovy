@@ -1,4 +1,4 @@
-package econsupp
+package econsupp.api
 import econsupp.api.Medline_master
 import econsupp.api.Supp_metric_rank
 import grails.converters.JSON
