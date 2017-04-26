@@ -1,8 +1,10 @@
 package econsupp.api
 
 import grails.converters.*
+import java.sql.Timestamp
 
 class Met_sumsController {
+    def sessionFactory
     def index() {
 		def obj = [:]
 		obj['records'] = [:]
@@ -23,15 +25,18 @@ class Met_sumsController {
 		if (params.int("pub_year_max")) {
 			maxYear = params.int("pub_year_max")
 		}
-
-		obj['records']['data'] = Metric_sums.createCriteria().list {
+		def data = Metric_sums.createCriteria().list {
 			between("pub_year", minYear, maxYear)
 			'in'('metric_id', (Supp_metric_list.createCriteria().list {
 				eq("display", true)
 			}).metric_id)
 		}
+		obj['records']['data'] = data
 		// obj['records']['data'] = Metric_sums.list(params);
 		render obj as JSON
 
+        // def session = sessionFactory.currentSession 
+        // session.flush() 
+        // session.clear() 
     }
 }
