@@ -1,0 +1,53 @@
+<div layout="row" layout-margin>
+    <div layout="column">
+        <div class="hexagon-item">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="66%" height="66%" id="heg-legend-hex" viewbox="0 0 173.20508075688772 200">
+                <path id="hex-legend-path" d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z"></path>
+                <g id="hex-legend-bar-group" transform="translate(86.60254037844386,146.41016151377545)" class="metric-rect"></g>
+            </svg>
+            <br>
+            <div style="">
+                <span class="hexagon-legend-metric" id="hex-legend-metric-name"></span>
+                <br>
+                <span class="hexagon-legend-metric" id="hex-legend-metric-value"></span>
+            </div>
+        </div>
+        <!--         <div class="legend-text-item">
+            <table id="hex-metric-table" class="hexagon-text">
+                <tbody>
+                    <tr>
+                        <td><span id="hex-legend-metric-0"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span id="hex-legend-metric-1"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span id="hex-legend-metric-2"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span id="hex-legend-metric-3"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+ </div>
+ -->
+    </div>
+    <div flex="75" layout="column">
+        <div class="discipline-name">
+            <h2>Discipline: <span id="hex-legend-disc-name"></span></h2>
+            <h3>Subdiscipline: <span id="hex-legend-subd-name"></span></h3>
+        </div>
+        <md-progress-circular progress id="hex-legend-table-progress" class="md-accent" md-mode="indeterminate"></md-progress-circular>
+        <p id="hex-legend-table-no-records">No records found</p>
+        <div id="hex-legend-table-container" ng-controller="tableCtrl">
+            <table ng-table id="hex-legend-table" class="table data-table" show-filter="false">
+                <tr ng-repeat="row in tableData" ng-model="tableData">
+                    <td title="'Name'">{{row.last_name}}, {{row.first_name}}</td>
+                    <td title="'Pub Year'">{{row.pub_year}}</td>
+                    <td title="'Article Title'" class="title"><a target="_blank" href="https://www.ncbi.nlm.nih.gov/pubmed/{{row.pmid}}">{{row.article_title}}</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

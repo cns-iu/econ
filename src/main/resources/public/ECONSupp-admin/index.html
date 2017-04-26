@@ -1,0 +1,170 @@
+<DOCTYPE! html>
+
+    <head>
+        <meta charset=UTF-8 />
+        <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>ECON - Admin</title>
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/angular/smart-table.min.js"></script>
+        <script src="lib/head.js"></script>
+        <script src="src/Init.js"></script>
+    </head>
+
+    <body>
+        <section ng-controller="tableCtrl" style="min-height: 800px;" layout="column" id="main-section" layout-fill ng-cloak>
+            <wrapper class="wrapper-div">
+                <div layout="row" style="width: 80%;">
+                    <div layout="column" layout-align="start start" layout-margin>
+                        <div layout="row">
+                            <div layout="column">
+                                <h1 style="text-transform: uppercase;">ECON Administration Interface</h1>
+                            </div>
+                            <div layout="column" class="about-admin-button">
+                                <md-button ng-controller="AboutCtrl" class="md-fab md-small" aria-label="About" ng-click="showAdminAbout($event)">
+                                    <md-icon md-svg-src="img/icons/cns_question.svg"></md-icon>
+                                </md-button>
+                            </div>
+                        </div>
+                        <p>To add a new metric, enter the Metric Name, Metric Description, and Display fields in the form below. The Display option permits adding a new Metric without representing it on the HITS Metrics Visualization. Then select the Choose File button and select a comma separated file containing one PMID per row. <span class="download"ng-click="showFileSample($event)" style="cursor:pointer;">Click here</span> to see a sample file.</p>
+                    </div>
+                </div>
+                <div>
+                    <div layout="row" layout-align="start center" class="form-row">
+                        <div layout="column" style="height: 90; width: 100%; overflow: hidden;">
+                            <table st-table="" class="table table-striped econ-table">
+                                <tbody>
+                                    <tr>
+                                        <td st-ratio="10">
+                                            <md-input-container>
+                                                <label>Metric ID</label>
+                                                <input ng-model="created.metric_id">
+                                            </md-input-container>
+                                        </td>
+                                        <td st-ratio="15">
+                                            <md-input-container>
+                                                <label>Metric Name</label>
+                                                <input ng-model="created.metric_name">
+                                            </md-input-container>
+                                        </td>
+                                        <td st-ratio="30">
+                                            <md-input-container style="width: 95%">
+                                                <label>Metric Description</label>
+                                                <input ng-model="created.metric_desc">
+                                            </md-input-container>
+                                        </td>
+                                        <td st-ratio="15" style="text-align:left;" dir="rtl">
+                                            <md-checkbox class="check" ng-model="created.display" aria-label="Checkbox 1" class="econ-checkbox" style="margin-top: 25px;">
+                                                Display
+                                            </md-checkbox>
+                                        </td>
+                                        <td st-ratio="30">
+                                            <div class="buttons" style="padding-top:9px">
+                                                <md-button ng-click="postEvent($event, row)" class="submit-btn md-raised">Create</md-button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div layout="row" layout-align="start center">
+                        <div layout="column" style="max-height: 305px; width: 100%">
+                            <table id="metric-table" st-table="rowCollection" class="table table-striped econ-table">
+                                <thead style="padding-right:17px">
+                                    <tr>
+                                        <th st-ratio="10" st-sort="metric_id">Metric ID</th>
+                                        <th st-ratio="15" st-sort="metric_name">Metric Name</th>
+                                        <th st-ratio="30" st-sort="metric_desc">Metric Description</th>
+                                        <!-- TODO: Make true = ✓, false = ✗ -->
+                                        <th st-ratio="5" st-sort="display">Display</th>
+                                        <th st-ratio="5">Edit</th>
+                                        <th st-ratio="5">Remove</th>
+                                        <th st-ratio="30">Upload Data</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="row in rowCollection track by row.metric_id">
+                                        <td st-ratio="10">{{row.metric_id | number}}</td>
+                                        <td st-ratio="15">{{row.metric_name}}</td>
+                                        <td st-ratio="30">{{row.metric_desc}}</td>
+                                        <td st-ratio="5">{{row.display | YesNo}}</td>
+                                        <td st-ratio="5" id="edit" class="action" ng-click="editSelect(row)" style="cursor:pointer;  padding:10px 24px !important;">
+                                            <i class="material-icons">edit</i>
+                                        </td>
+                                        <td st-ratio="5" id="edit" class="action" style="cursor:pointer; padding:10px 24px !important;"><i ng-click="deleteEvent($event, row)" class="material-icons">remove_circle</i></td>
+                                        <td st-ratio="30">
+                                            <div class="buttons" style="padding-top:9px">
+                                                <input type="file" class="metric_data_upload" id="metric_data_upload-{{row.metric_id}}" />
+                                                <input type='button' id='load-file' ng-click="uploadMetricFile($event, row.metric_id)" value='Upload'>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div layout="column">
+                        </div>
+                    </div>
+                    <div layout="row" layout-align="start center" ng-model="selected" class="form-row">
+                        <div layout-padding layout="column" style="height: 110px; width: 100%; overflow: hidden;">
+                            <div flex layout="row">
+                                <div flex="70" layout="column" style="text-align: justify">
+                                    After uploading data for all required metrics, the database will need to update ranking values in order for the data to be used in the visualization. No changes will be reflected on the visualization until this operation takes place. The calculations will take some time.
+                                </div>
+                                <div style="margin-left: 7px;" layout="column">
+                                    <md-button ng-click="computeEvent($event)" class="md-raised md-accent">Compute</md-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ng-hide="!isSelected" -->
+                    <div layout="row" layout-align="start center" ng-model="selected" ng-hide="!isSelected" class="form-row">
+                        <div layout="column" style="height: 110px; width: 100%; overflow: hidden;">
+                            <table st-table="" class="table table-striped econ-table">
+                                <tbody>
+                                    <tr>
+                                        <td st-ratio="10">
+                                            <md-input-container>
+                                                <label>Metric ID</label>
+                                                <input ng-model="selected.metric_id" ng-disabled=t rue>
+                                            </md-input-container>
+                                        </td>
+                                        <td st-ratio="15">
+                                            <md-input-container>
+                                                <label>Metric Name</label>
+                                                <input ng-disabled ng-model="selected.metric_name">
+                                            </md-input-container>
+                                        </td>
+                                        <td st-ratio="30">
+                                            <md-input-container style="width: 95%;">
+                                                <label>Metric Description</label>
+                                                <input ng-disabled ng-model="selected.metric_desc">
+                                            </md-input-container>
+                                        </td>
+                                        <td st-ratio="15" style="text-align: left" dir="rtl">
+                                            <md-checkbox aria-label="Checkbox 1" class="econ-checkbox" ng-model="selected.display" style="margin-top: 25px;">
+                                                Display
+                                            </md-checkbox>
+                                        </td>
+                                        <td st-ratio="30" style="padding: 0px !important;">
+                                            <div class="buttons" style="padding-top:9px">
+                                                <md-button ng-click="cancelUpdateEvent($event, row)" class="submit-btn md-raised">Cancel</md-button>
+                                                <md-button ng-click="updateEvent($event, row)" class="submit-btn md-raised">Update</md-button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </wrapper>
+        </section>
+    </body>
+
+    </html>
+
+
+                                            <!-- <md-button class="submit-btn md-raised"> Filter </md-button> -->

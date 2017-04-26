@@ -1,0 +1,16 @@
+<table st-table="{{sttable}}" class="table table-striped">
+	<thead>
+	<tr>
+		<th ng-repeat="opt in stOpts" st-sort="opt.st-sort">{{opt.pretty}}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat="row in rowCollection">
+		<td>{{row.firstName | uppercase}}</td>
+		<td>{{row.lastName}}</td>
+		<td>{{row.birthDate | date}}</td>
+		<td>{{row.balance | currency}}</td>
+		<td><a ng-href="mailto:{{row.email}}">email</a></td>
+	</tr>
+	</tbody>
+</table>

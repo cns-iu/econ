@@ -9,7 +9,9 @@ class UrlMappings {
             }
         }
 
-        "/"(controller: 'application', action:'index')
+        "/econ-ucsdmap"(redirect:'/ECONSupp/ucsdmap.html')
+        "/econ-hexmap"(redirect:'/ECONSupp/hexmap.html')
+        "/econ-admin"(redirect:'/ECONSupp-admin/index.html')
         "500"(view: '/error')
         "404"(view: '/notFound')
         "/met_list"(controller: "met_list")

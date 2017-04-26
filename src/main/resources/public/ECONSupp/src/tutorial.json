@@ -1,0 +1,6 @@
+{
+    "projectName": "Tutorial-Project",
+    "baseURL": "git@github.iu.edu:CNS/CNS-WVF.git",
+    "pluginsURL": "git@github.iu.edu:CNS/CNS-WVF-Plugins.git",
+    "projectURL": "git@github.iu.edu:CNS/CNS-WVFP-TestProject.git"
+}

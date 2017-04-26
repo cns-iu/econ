@@ -1,0 +1,164 @@
+/*
+.title-section {
+    padding: 20px !important;
+}
+
+.econ-table table {
+    width:60px;
+}
+
+*/
+
+p {
+    font-size: 14px;
+}
+
+.metric .md-input-container {
+    min-width: 200px;
+}
+
+.check .md-checkbox {
+    margin-top: 16px !important;
+    margin-bottom: 1px !important;
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+html {
+    background: #fefefe;
+}
+
+.title-row: h1 {
+    letter-spacing: 30px;
+}
+
+table {
+}
+
+td {
+    min-width: 50px;
+}
+
+td p {
+    padding: 7px;
+}
+
+.action td {
+    min-width: 25px !important;
+}
+
+th {
+    text-align: left;
+    padding: 10px 0px;
+}
+
+tr {
+    valign: center;
+}
+
+table {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 600px; /* this can vary */
+    width: inherit;
+}
+
+table * {
+    box-sizing: inherit;
+    -moz-box-sizing: inherit;
+}
+
+thead {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: #222;
+    color: #d6d9d8;
+    width: inherit;
+}
+
+tbody {
+    overflow-y: scroll;
+    display: inline-block;
+    width: inherit;
+}
+
+thead > tr, tbody > tr, tfoot > tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+thead, tfoot {
+    flex-shrink: 0;
+}
+
+th, tbody td {
+    width: 20%; /* this can vary */
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+tfoot {
+    display: inline-block;
+}
+
+tfoot td {
+    width: 100%;
+    display: inline-block;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: #f9f9f9;
+}
+
+.form-row .md-input-container {
+    padding-left: 0px !important;
+}
+
+
+.form-row {
+    background: #F6F6F6;
+    margin-left: 0px;
+}
+
+.file-upload {
+    width: 250px;
+    margin: 6px 8px;
+}
+
+.layout-row .file-upload {
+    height: 30px;
+}
+
+.form-row tbody {
+    overflow-y: hidden !important;
+    display: inline-block;
+    width: inherit;
+    margin-bottom: 20px;
+}
+
+th {
+    cursor: pointer;
+    font-weight: 400;
+}
+
+
+.st-sort-ascent:before {
+    content: '\25B2';
+}
+
+.st-sort-descent:before {
+    content: '\25BC';
+}
+.custom-dialog {
+    margin: 30px;
+}

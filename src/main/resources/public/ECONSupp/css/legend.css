@@ -1,0 +1,333 @@
+
+.hex-legend {
+    background-color: #313131;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 230px;
+    color: #ffffff !important;
+    font-weight: 400;
+    /*  height:280px;*/
+    /*justify-content: space-between;*/
+    display: flex;
+    width: 1000px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.22);
+    
+}
+
+.hex-legend td {
+    vertical-align: top;
+}
+
+.hex-legend.shown {
+    display: block;
+}
+
+.hex-legend.default {
+    display: none;
+}
+
+.hex-legend.legend-hide {
+    display: none;
+}
+
+.hex-legend h1 {
+    font-size: 1.5em;
+    line-height: 1.7rem;
+    margin:0px !important;
+}
+
+.hex-legend h2 {
+    font-size: 1.2em;
+    line-height: 1.7rem;
+}
+
+.hex-legend h3 {
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+}
+
+
+
+
+/*-- Left Container --*/
+
+.left-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 700px;
+  /*  height: 200px;*/
+}
+
+.hex-legend.hexagon-item {
+    align-self: center;
+    padding-bottom: 10px;
+}
+
+.hexagon-text {
+    width: 250px;
+    color: #fff;
+}
+
+
+/*-- Right Container --*/
+
+.hex-legend .right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 7px 20px;
+    height: 230px !important;
+    width: 700px !important;
+}
+
+.hex-legend .right-container h1,
+h2 {}
+
+.hex-legend .data-table {
+    background: #ededed;
+    color: #000000;
+    height: 170px;
+    width: 100%;
+    overflow: auto !important;
+}
+
+.hex-legend .data-table tbody {
+    overflow: auto !important;
+    padding: 0px;
+    width: 600px;
+}
+
+.hex-legend .data-table td {
+    text-align: left;
+    padding: 5px;
+    min-width: 100px;
+}
+
+.hex-legend .data-table th {
+    text-align: left;
+    padding: 5px;
+    min-width: 100px;
+}
+
+.hex-legend .year {
+    width: 15px !important;
+}
+
+.hex-legend .title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 550px) {
+    .legend {
+        width: 400px;
+        height: 370px;
+        display: flex;
+        flex-flow: row wrap;
+        flex-direction: column;
+    }
+    .hex-legend .right-container {
+        width: 300px !important;
+    }
+    .hex-legend .discipline-name {
+        width: 300px;
+    }
+    .hex-legend .left-container {
+        width: 160px;
+        height: 200px;
+        align-self: center;
+        /*      flex-direction: row;*/
+    }
+    .hex-legend .hexagon-item {
+        align-self: flex-start;
+        align-self: center;
+        padding-right: 10px;
+    }
+    .hex-legend .hexagon-text {
+        align-self: flex-end;
+    }
+}
+
+
+/* -- Legend --*/
+
+.legend {
+background-color: #313131;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 230px;
+    color: #ffffff !important;
+    font-weight: 400;
+    /*  height:280px;*/
+    /*justify-content: space-between;*/
+    display: flex;
+    width: 1000px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.legend td {
+    vertical-align: top;
+}
+
+
+.legend.default {
+    display: none;
+}
+
+.legend .legend-hide {
+    display: none;
+}
+
+.legend h1 {
+    font-size: 1.5em;
+    line-height: 1.7rem;
+}
+
+.legend h2 {
+    font-size: 1.2em;
+    line-height: 1.7rem;
+}
+
+.legend h3 {
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+}
+
+
+
+/*-- Left Container --*/
+
+.legend .left-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 15px;
+    width: 200px;
+    height: 200px;
+    bottom:20px;
+}
+
+.hexagon-item {
+    justify-content: center !important;
+    padding-bottom: 10px;
+}
+
+.hexagon-text {
+    width: 250px;
+    color: #fff;
+}
+
+.legend-text-item {}
+
+
+/*-- Right Container --*/
+
+.legend .right-container {
+    display: flex;
+    flex-direction: column;
+    padding: 7px 20px;
+    width: 700px !important;
+}
+
+.legend .right-container h1,
+h2 {}
+
+.legend .data-table {
+    background: #ededed;
+    color: #000000;
+    height: 170px;
+    width: 100%;
+    overflow: auto !important;
+}
+
+.legend .data-table tbody {
+    overflow: auto !important;
+    padding: 0px;
+    width: 600px;
+}
+
+.legend .data-table td {
+    text-align: left;
+    padding: 5px;
+    min-width: 130px;
+}
+
+.legend .data-table th {
+    text-align: left;
+    padding: 5px;
+    min-width: 100px;
+}
+
+td .year {
+    min-width: 20px;
+}
+
+.legend .title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.md-whiteframe-4dp {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.0), 
+    0px 4px 5px 0px rgba(0, 0, 0, 0.00), 
+    0px 1px 10px 0px rgba(0, 0, 0, 0.00) !important;
+}
+
+@media only screen and (max-width: 550px) {
+    .legend {
+        width: 400px;
+        height: 370px;
+        display: flex;
+        flex-flow: row wrap;
+        flex-direction: column;
+    }
+    .legend .right-container {
+        width: 300px !important;
+    }
+    .legend .discipline-name {
+        width: 300px;
+    }
+    .legend .left-container {
+        width: 160px;
+        height: 200px;
+        align-self: center;
+        /*      flex-direction: row;*/
+    }
+    .legend .hexagon-item {
+        align-self: flex-start;
+        align-self: center;
+        padding-right: 10px;
+    }
+    .legend .hexagon-text {
+        align-self: flex-end;
+    }
+}
+
+
+/*-- Scroll Bar --*/
+
+table::-webkit-scrollbar {
+    width: 1em;
+}
+
+table::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+table::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+#hex-legend-table {
+    width: 700px
+}
+
+.hexagon-legend-metric {
+    
+}

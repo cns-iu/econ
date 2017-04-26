@@ -1,0 +1,235 @@
+.zoom-level-text {
+    fill: #eaeaea;
+}
+
+.hexagon {
+    cursor: pointer;
+}
+
+.subd_label {
+    fill: white;
+    text-shadow: 0px 0px 5px #000;
+
+}
+
+.disc-label,
+.wvf-label {
+    font-weight: 600;
+    font-size: 18px;
+    cursor:pointer;
+    stroke-width: .5px;
+    stroke: #000000;
+}
+
+
+.background-clickable {
+    cursor:pointer;
+}
+
+.metric-rect {
+    fill: white;
+    stroke: black;
+    stroke-width: .25;
+}
+
+.selected {
+    opacity: 1;
+}
+
+.deselected {
+    cursor: pointer;
+    opacity: .4;
+}
+
+.highlighted {
+    opacity: .85;
+}
+
+.wvf-axis.text {
+    font: 10px open sans sans-serif;
+}
+
+.wvf-axis.path {
+    stroke-dasharray: 5, 5;
+    fill: none;
+    stroke: #666;
+    shape-rendering: crispEdges;
+}
+
+.wvf-axis.line {}
+
+
+/* ---- Node Styles ---- */
+
+.wvf-node {
+    stroke: #333333;
+    stroke-width: .5;
+    cursor:pointer;
+}
+
+.wvf-node.selected {
+    opacity: .8;
+}
+
+.subd {
+    display: none;
+    cursor: default;
+    font-size: 12;
+}
+
+.subd.selected {
+    display: block;
+}
+
+.subd.deselected {
+    display: none;
+}
+
+.wvf-node.deselected {
+    cursor: pointer;
+    opacity: .5;
+}
+
+.wvf-node.highlighted {
+    opacity: .7;
+}
+
+
+/* ---- Labels ----- */
+
+/*.wvf-label {
+    font-size: 24px;
+    font-weight: 600 !important;
+    stroke-width: 1px;
+    stroke: #000000;
+}*/
+
+.wvf-label:hover {
+    cursor: pointer;
+}
+
+.wvf-label.selected {}
+
+.wvf-label.deselected {
+    opacity: .2;
+}
+
+.wvf-label.focused {}
+
+
+/* ---- Edge Styles ---- */
+
+.wvf-edge {
+    stroke: #8e8e8e !important;
+    cursor: pointer;
+    stroke-width: .5;
+    opacity: .5;
+    fill: none;
+}
+
+.wvf-edge.selected {
+    stroke-width: 1;
+    opacity: 1;
+}
+
+.wvf-edge.deselected {
+    opacity: .2;
+}
+
+.wvf-edge.focused {}
+
+
+/* --- Rectangle Styles ---- */
+
+.wvf-rect.selected {}
+
+.wvf-rect.deselected {}
+
+.wvf-rect.focused {}
+
+
+/* --- Path Styles  ----- */
+
+.wvf-path.selected {}
+
+.wvf-path.deselected {}
+
+.wvf-path.focused {}
+
+
+/* --- Area Styles  ----- */
+
+.wvf-area.selected {}
+
+.wvf-area.deselected {}
+
+.wvf-area.focused {}
+
+
+/* --- Shape Styles  ----- */
+
+.wvf-shape.selected {}
+
+.wvf-shape.deselected {}
+
+.wvf-shape.focused {}
+
+
+.sel_subd_list {
+    position:relative;
+    z-index:1;
+    padding: 0px;
+}
+
+.sel_subd_list:before{
+    position:absolute;
+    z-index:-1;
+    top:0;
+    left:-12;
+    width:10px;
+    height:100%;
+    content:"";
+}
+
+.sel_subd_list.did1:before {
+    background: #379908;
+}
+.sel_subd_list.did2:before {
+    background: #00FF80;
+}
+.sel_subd_list.did3:before {
+    background: #FF0000;
+}
+.sel_subd_list.did4:before {
+    background: #61FFFF;
+}
+.sel_subd_list.did5:before {
+    background: #0000FF;
+}
+.sel_subd_list.did6:before {
+    background: #A71916;
+}
+.sel_subd_list.did7:before {
+    background: #FF85FF;
+}
+.sel_subd_list.did8:before {
+    background: #FFB529;
+}
+.sel_subd_list.did9:before {
+    background: #FFFF80;
+}
+.sel_subd_list.did10:before {
+    background: #B8150B;
+}
+.sel_subd_list.did11:before {
+    background: #A819FA;
+}
+.sel_subd_list.did12:before {
+    background: #FF804D;
+}
+.sel_subd_list.did13:before {
+    background: #FFFF00;
+}
+.disabled {
+    opacity: .05 !important;
+}

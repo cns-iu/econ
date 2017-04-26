@@ -1,0 +1,202 @@
+/* ------ General Page Styles ------ */
+
+.subd-list {
+	z-index:111111111111;
+	width:200px;
+	padding: 10px;
+	background: #eaeaea;
+	height: 200px;
+	overflow: auto;
+	top: 0;
+	right: 320px;
+	position: fixed;
+}
+
+
+.ui-loader {
+    display: none;
+}
+
+a {
+	color: #4c7520;
+}
+
+a:visited, a:hover  {
+	color: rgb(141,198,63);
+}
+
+
+html,body {
+	font-size: 14px;
+	font-family: 'open sans', sans-serif;
+	overflow: hidden;
+}
+
+body {
+	font-family: 'Lato', sans-serif;
+	font-size: 13px;
+    background-color: #272822;
+}
+
+h1 {
+	font-size: 1.3em;
+	font-weight: 400;
+}
+
+h2 {
+	font-size: 1em;
+	font-weight: 300;
+}
+
+h3 {
+	font-size: .07em;
+}
+
+#hex-legend-table {
+    width: 700px
+}
+
+.hexagon-legend-metric {
+    left: 0;
+}
+
+.style-slider {
+	padding-top: 10px;
+	padding-left: 10px;
+	width: 235px;
+	font-size: 14px !important;
+}
+
+.irs-min, .irs-max {
+    color: rgba(0,0,0,0.87) !important;
+    font-size: 14px; line-height: 1.5 !important;
+    text-shadow: none;
+    top: 0; padding: 1px 3px;
+    background: #e1e4e9;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+#metric_description_text {
+	font-size: 16px !important;
+}
+
+#metric_desc_div p {
+	font-size: 16px !important;
+}
+
+
+.irs-grid-text {
+	color: rgba(0,0,0,0.87) !important;
+	top: 21px !important;
+	font-size: 14px !important;
+}
+
+.irs-from {
+    color: #fff !important;
+    font-size: 14px !important;
+    line-height: 1.333;
+    text-shadow: none;
+    padding: 1px 5px;
+    background: #9bcc57;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.irs-min {
+	font-size: 14px !important;
+}
+
+.irs-to {
+	font-size: 14px !important;
+}
+
+.irs-max {
+	font-size: 14px !important;
+}
+
+md-icon.ng-scope {
+	height: 13px !important;
+    width: 13px !important;
+/*    min-height: 10px !important;
+    min-width: 10px !important;*/
+    margin: auto;
+    min-width: 1% !important;
+	min-height: 1% !important;
+}
+
+.md-button.md-small {
+	min-width: 1% !important;
+    height: 25px !important;
+    width: 25px !important;
+    min-height: 1% !important;
+}
+
+md-dialog {
+	padding: 20px 30px !important;
+}
+
+.about-hex {
+	color: rgb(0,0,0) !important;
+}
+
+.about-hex h1 {
+	font-size: 20px;
+}
+
+.about-hex h3 {
+	font-size: 16px;
+	text-align: left !important;
+	font-weight: 600 !important;
+
+}
+
+.about-hex a {
+	color: rgb(141,198,63);
+	font-weight: bold;
+}
+
+.about-hex a:visited, a:hover  {
+	color: rgb(141,198,63);
+}
+
+.about-scimap {
+	color: rgb(0,0,0) !important;
+}
+
+.about-scimap h1 {
+	font-size: 20px;
+}
+
+.about-scimap h3 {
+	font-size: 16px;
+	text-align: left !important;
+		font-weight: 600 !important;
+
+}
+
+.about-scimap a {
+	color: rgb(141,198,63);
+	font-weight: bold;
+}
+
+.about-scimap a:visited, a:hover  {
+	color: rgb(141,198,63);
+}
+
+.wrapper {
+	min-height: 100%;
+}
+
+@-moz-document url-prefix() { 
+  #scimap01 {
+	min-height: 1100px;
+	}
+
+  #hexscimap01 {
+  	min-height: 1100px;
+  }
+  }
+
+
+

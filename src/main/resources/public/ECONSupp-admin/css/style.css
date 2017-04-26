@@ -1,0 +1,173 @@
+/* ------ General Page Styles ------ */
+html,body {
+	font-size: 14px;
+	font-family: 'open sans', sans-serif;
+	overflow: none !important;	
+	width: 100%;
+	height: 100%;
+	background: #FFF;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+}
+
+html {
+	overflow: none;	
+	font-size: open sans !important;
+	font-weight: 400 !important;
+	color: #555 !important;
+}
+
+/*h1 {
+	font-size: 20px;
+	text-transform: uppercase;
+}*/
+
+h3 {
+	font-size: 20px;
+	font-family: open sans !important;
+	font-weight: 600;
+	color: #555 !important;
+	text-align: center !important;
+}
+
+button {
+	border-radius: 5px;
+	font-family: roboto;
+	font-weight: 400 !important;
+}
+
+dl, dd, dt{
+    margin:0;
+}
+
+
+/* -------- Tables -------- */
+
+
+.table_specification{
+    display: table;
+    width:80%;
+    overflow:hidden;
+}
+
+.table_specification dl{    
+    display:table-row;  
+}
+
+.table_specification dt, .table_specification dd{
+    display: table-cell;
+    width:30%;
+}
+
+.table_specification dd{
+	text-align:right;
+}
+
+#metric-table td {
+	border-right: 1px solid #cacaca;
+	border-bottom: 1px solid #cacaca;
+	padding-left: 6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+md-icon.ng-scope {
+	height: 13px !important;
+    width: 13px !important;
+/*    min-height: 10px !important;
+    min-width: 10px !important;*/
+    margin: auto;
+    min-width: 1% !important;
+	min-height: 1% !important;
+}
+
+.md-button.md-small {
+	min-width: 1% !important;
+    height: 25px !important;
+    width: 25px !important;
+    min-height: 1% !important;
+}
+
+md-dialog {
+	padding: 20px 30px !important;
+}
+
+.about-hex {
+	color: rgb(0,0,0) !important;
+}
+
+.about-hex h1 {
+	font-size: 20px;
+}
+
+.about-hex h3 {
+	font-size: 16px;
+	text-align: left !important;
+	font-weight: 600 !important;
+
+}
+
+.about-hex a {
+	color: rgb(141,198,63);
+	font-weight: bold;
+}
+
+.about-hex a:visited, a:hover  {
+	color: rgb(141,198,63);
+}
+
+.about-scimap {
+	color: rgb(0,0,0) !important;
+}
+
+.about-scimap h1 {
+	font-size: 20px;
+}
+
+.about-scimap h3 {
+	font-size: 16px;
+	text-align: left !important;
+		font-weight: 600 !important;
+
+}
+
+.about-scimap a {
+	color: rgb(141,198,63);
+	font-weight: bold;
+}
+
+.about-scimap a:visited, a:hover  {
+	color: rgb(141,198,63);
+}
+
+.about-admin-button {
+
+}
+
+
+.about-admin-button path{
+fill: rgba(255,255,255,0.87);
+}
+
+.download {
+		color: rgb(141,198,63);
+	font-weight: bold;
+} 
+
