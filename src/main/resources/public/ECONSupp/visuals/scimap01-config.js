@@ -60,6 +60,8 @@ events.scimap01 = function(scope) {
         var toggleMetricDisplayScope = angular.element(toggleMetricDisplayElem).scope()
         var updateFilter = updateFilter;
 
+        var legendNodeSizeData = {};
+
         underlyingScimapData.disciplines.forEach(function(d, i) {
             disc_list.push(d.disc_name);
         })
@@ -93,7 +95,11 @@ events.scimap01 = function(scope) {
                     .entries(d.values.children);
             });
         }
+
+        var loopSelection;
+
         function loopPing(selection) {
+            loopSelection = selection;
             clearInterval(pingInterval);
             pingInterval = null;
             pingTransition(selection);
@@ -101,17 +107,26 @@ events.scimap01 = function(scope) {
                 pingTransition(selection)
             }, 2500);
         }
+
+        function cancelPing() {
+            clearInterval(pingInterval);
+            setTimeout(function() {
+                loopSelection.style("stroke-width", 0)
+            }, 1)
+        }
+
         function pingTransition(selection) {
             selection
                 .transition().duration(500).ease("bounce")
-                    .style("stroke", "white").style("stroke-width", 10)
+                .style("stroke", "white").style("stroke-width", 10)
                 .transition().duration(750).ease("bounce")
-                    .style("stroke-width", 0)
+                .style("stroke-width", 0)
                 .transition().duration(500).ease("bounce")
-                    .style("stroke", "white").style("stroke-width", 10)
+                .style("stroke", "white").style("stroke-width", 10)
                 .transition().duration(750).ease("bounce")
-                    .attr("stroke-width", 0)
+                .attr("stroke-width", 0)
         }
+
         function generateScales(attr, range) {
             var metricScales = {};
 
@@ -151,6 +166,7 @@ events.scimap01 = function(scope) {
             })
             return metricScales;
         }
+
         function updateFilter(selected) {
 
             legend.addClass("default");
@@ -250,13 +266,19 @@ events.scimap01 = function(scope) {
                 });
                 currNode.selectAll("circle").attr("r", arcOuterRadius).attr("opacity", 1)
                 currNode.selectAll("text").attr("y", -arcOuterRadius - 2)
-                if (metricFormScope.selected.length == 1) {                    
+                if (metricFormScope.selected.length == 1) {
+                    // var range = [2, 24];              
                     increaseRadius(d, selected, currNode, metricSumRange, [2, 24])
+                    legendNodeSizeData = {
+                        scale: metricSumRange,
+                        range: [2, 24]
+                    }
+
                     $("#legendNodeSizeContainer").css("display", "block")
                     $("#legendNodeBarContainer").css("display", "none")
                 } else {
                     $("#legendNodeSizeContainer").css("display", "none")
-                    $("#legendNodeBarContainer").css("display", "block")                    
+                    $("#legendNodeBarContainer").css("display", "block")
                     switch (type[0]) {
                         case "Bar":
                             appendRects(d, selected, currNode.append("g").classed("metric", true), range, metricScales)
@@ -271,7 +293,8 @@ events.scimap01 = function(scope) {
                 }
             })
             $("#scimap-loading").css("display", "none")
-        }        
+        }
+
         function getMetricSize(d, d1, metricScales) {
             var metric = d.nestedMetrics.filter(function(d2, i2) {
                 return d2.key == d1;
@@ -282,6 +305,7 @@ events.scimap01 = function(scope) {
             }
             return 0;
         }
+
         function appendRects(d, selected, currNode, range, metricScales) {
             var rectOffset = range[1] * Math.cos(Math.pow(Math.PI, 2) * 2);
             var barWidth = rectOffset / selected.length * 2;
@@ -311,6 +335,7 @@ events.scimap01 = function(scope) {
                 .attr("stroke-width", .25)
                 .attr("fill", "white")
         }
+
         function increaseRadius(d, selected, currNode, metricSumRange, range) {
             var sum = 0;
             selected.forEach(function(d1, i1) {
@@ -322,19 +347,20 @@ events.scimap01 = function(scope) {
                 .domain([metricSumRange.min, metricSumRange.max])
                 .range(range)
 
-                updateNodeSizeLegend(scale);
+            updateNodeSizeLegend(scale);
 
 
 
             currNode.selectAll("circle").attr("r", scale(sum))
         }
+
         function updateNodeSizeLegend(scale) {
             nodeSize.SVG.selectAll("circle").attr("stroke", "white");
             nodeSize.SVG.selectAll("line").attr("stroke", "white");
             nodeSize.SVG.selectAll("text").attr("fill", "white");
 
             nodeSize.setTitle("")
-            nodeSize.updateNodeSize(range);
+            nodeSize.updateNodeSize([2, 24]);
             nodeSize.updateTextFromFunc(function(d) {
                 return scale.invert(d / 2) / scope.zoom.scale();
             });
@@ -347,6 +373,7 @@ events.scimap01 = function(scope) {
                 }, 10);
             });
         }
+
         function bindDOM() {
             sliderFormElem.find(".submit-btn").on("click", function() {
                 legend.addClass("default");
@@ -413,6 +440,7 @@ events.scimap01 = function(scope) {
                         loopPing(filtered.selectAll("circle"))
                     }
                 })
+
                 subdArr.forEach(function(d, i) {
                     var subdMatch = underlyingScimapData.nodes.filter(function(d1, i1) {
                         return d1.subd_name == d;
@@ -427,6 +455,7 @@ events.scimap01 = function(scope) {
                 })
             })
 
+            $("#awesomeplete-clear-btn").on("click", cancelPing);
 
             metricFormScope.toggle = function(item, list) {
                 if (metricFormScope.radio) {
@@ -485,6 +514,7 @@ events.scimap01 = function(scope) {
                 }
             })
         }
+
         function applySVGEvents() {
             scope.SVG.background.on("click.removesublist", function(d, i) {
                 $("#selected-subd").text("");
@@ -506,6 +536,10 @@ events.scimap01 = function(scope) {
                             return d1 == d2.metric_name;
                         })[0])
                     })
+
+                    setTimeout(function() {
+                        updateNodeSizeLegend(legendNodeSizeData.scale);
+                    }, 250)
 
                     metric_idList.forEach(function(d1, i1) {
                         $.ajax({

@@ -35,7 +35,16 @@ app.controller('tableCtrl', ['$scope', function($scope) {
     $scope.clearTableData = function() {
         $scope.tableData = [];
     }
-}])
+}]).directive('stRatio', function() {
+    return {
+        link: function(scope, element, attr) {
+            var ratio = +(attr.stRatio);
+
+            element.css('width', ratio + '%');
+
+        }
+    };
+})
 
 
 app.config(function($mdIconProvider) {

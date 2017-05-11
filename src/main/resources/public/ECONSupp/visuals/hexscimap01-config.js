@@ -77,6 +77,8 @@ events.hexscimap01 = function(scope) {
             });
         }
 
+        var loopSelection;
+
         function loopPing(selection) {
             clearInterval(pingInterval);
             pingTransition(selection);
@@ -84,6 +86,14 @@ events.hexscimap01 = function(scope) {
                 pingTransition(selection)
             }, 2500);
         }
+
+        function cancelPing() {
+            clearInterval(pingInterval);
+            setTimeout(function() {
+                loopSelection.style("stroke-width", 0)
+            }, 1)
+        }
+
 
         function pingTransition(selection) {
             selection.transition().duration(500)
@@ -389,6 +399,9 @@ events.hexscimap01 = function(scope) {
                     this.input.value = before + text + ", ";
                 }
             });
+
+            $("#awesomeplete-clear-btn").on("click", cancelPing);
+
 
             metricFormScope.toggle = function(item, list) {
                 if (metricFormScope.radio) {

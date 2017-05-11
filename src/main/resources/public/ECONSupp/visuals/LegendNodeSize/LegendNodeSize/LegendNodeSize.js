@@ -76,7 +76,9 @@ visualizationFunctions.LegendNodeSize = function(element, data, opts) {
                 return context.SVG.selectAll("#midNode");
             }
             context.getMinNode = function() {
+                console.log(context.SVG.selectAll("#minNode"));
                 return context.SVG.selectAll("#minNode");
+
             }
 
             context.setTitle = function(text) {

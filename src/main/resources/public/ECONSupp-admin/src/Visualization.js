@@ -26,7 +26,6 @@ var Visualization = function(scope) {
         for (var key in from) {
             if (from.hasOwnProperty(key)) {
                 if (Object.prototype.toString.call(from[key]) === '[object Object]') {
-                    console.log(to);
                     if (!to.hasOwnProperty(key)) {
                         to[key] = {};
                     }
@@ -317,7 +316,6 @@ var Visualization = function(scope) {
             console.warn("No dataprep for: " + scope.attrs.ngIdentifier)
         }
     };
-    scope.isResetOnResize = true;
     scope.resetOnResize = function() {
         function debouncer(func, timeout) {
             var timeoutID, timeout = timeout || 200;
@@ -331,7 +329,6 @@ var Visualization = function(scope) {
             }
         }
         $(window).resize(debouncer(function(e) {
-
             scope.ResetVis();
         }));
         scope.isResetOnResize = true;

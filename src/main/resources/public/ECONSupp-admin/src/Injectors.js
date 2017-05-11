@@ -242,11 +242,13 @@ app.controller('tableCtrl', ['$scope', '$mdDialog', '$http', function(scope, $md
     }
 
     scope.computeEvent = function($event) {
+        $("#admin-compute-progress").css({"display": "block"});
         $http({
             //TODO: Fix?
             url: econSuppServiceBase + "/metric_update/",
             method: "GET"
         }).success(function(res) {
+            $("#admin-compute-progress").css({"display": "none"});
             $mdDialog.show(
                 $mdDialog.confirm()
                 .parent(angular.element(document.querySelector('#main-section')))

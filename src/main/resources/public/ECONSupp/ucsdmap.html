@@ -51,7 +51,6 @@
                                 </md-button>
                             </div>
                         </md-toolbar>
-
                         <div class="md-padding" ng-cloak>
                             <div>
                                 <fieldset class="demo-fieldset">
@@ -61,7 +60,8 @@
                                     </div>
                                     <div class="awesomplete">
                                         <input class="subd-input awesomplete-input" autocomplete="off" aria-autocomplete="list" data-multiple placeholder="Subdisciplines">
-                                        <md-button class="submit-btn md-raised" id="awesomplete-search-btn">Ping</button>
+                                        <md-button class="submit-btn md-raised" id="awesomplete-search-btn">Ping</md-button>
+                                        <md-button class="submit-btn md-raised" id="awesomeplete-clear-btn">Stop</md-button>
                                     </div>
                                 </fieldset>
                             </div>
@@ -78,7 +78,6 @@
                                 </div>
                             </div>
                         </div>
-                        
                         <div ng-controller="CheckboxCtrl" id="metricForm0" ng-title="Metrics" ng-include="template.url"></div>
                         <div id="sliderForm">
                             <div class="md-padding" ng-cloak>
@@ -93,9 +92,7 @@
                                 </div>
                             </div>
                         </div>
-
                         <div ng-controller="CheckboxCtrl" style="display:none" id="toggleMetricDisplay" ng-radio="true" ng-title="DEV ONLY - Size Coding Display" ng-values='Bar, Arc, Clover' ng-include="template.url"></div>
-
                     </md-sidenav>
                 </section>
                 <div style="right: 0;" class="legend default" ng-include="'partials/legend.html'"></div>
