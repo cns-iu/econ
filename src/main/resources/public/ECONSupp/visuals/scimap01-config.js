@@ -63,7 +63,7 @@ events.scimap01 = function(scope) {
         var legendNodeSizeData = {};
 
         underlyingScimapData.disciplines.forEach(function(d, i) {
-            disc_list.push(d.disc_name);
+            if (d.disc_name) disc_list.push(d.disc_name);
         })
         underlyingScimapData.nodes.forEach(function(d, i) {
             subd_list.push(d.subd_name);
@@ -100,8 +100,6 @@ events.scimap01 = function(scope) {
 
         function loopPing(selection) {
             loopSelection = selection;
-            clearInterval(pingInterval);
-            pingInterval = null;
             pingTransition(selection);
             pingInterval = setInterval(function() {
                 pingTransition(selection)
@@ -375,7 +373,7 @@ events.scimap01 = function(scope) {
         }
 
         function bindDOM() {
-            sliderFormElem.find(".submit-btn").on("click", function() {
+            $("#filter-btn").on("click", function() {
                 legend.addClass("default");
                 legend.removeClass("shown");
                 $("#scimap-loading").css("display", "block");
@@ -424,7 +422,7 @@ events.scimap01 = function(scope) {
             });
 
             $("#awesomplete-search-btn").on("click", function() {
-                var discString = $("input.disc-input")[0].value;
+                var discString = $("input.disc-input")[0].value; 
                 var subdString = $("input.subd-input")[0].value;
                 var discArr = discString.split(", ");
                 var subdArr = subdString.split(", ");

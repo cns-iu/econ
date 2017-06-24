@@ -253,7 +253,7 @@ h2 {}
 .legend .data-table td {
     text-align: left;
     padding: 5px;
-    min-width: 130px;
+    min-width: 20px;
 }
 
 .legend .data-table th {

@@ -16,8 +16,9 @@ var firstRun = true;
 var selectedMetrics = [];
 
 events.hexscimap01 = function(scope) {
+    console.log("eventsout");
     p.then(function() {
-
+        console.log("eventsin");
         var disc_list = [];
         var subd_list = [];
 
@@ -54,6 +55,7 @@ events.hexscimap01 = function(scope) {
         disableInactiveNodes();
         bindDOM();
         nestMetricData();
+
         updateFilter(metricFormScope.selected);
         applySVGEvents();
 
@@ -357,11 +359,12 @@ events.hexscimap01 = function(scope) {
         }
 
         function bindDOM() {
-            sliderFormElem.find(".submit-btn").on("click", function() {
+            $("#filter-btn").on("click", function() {
                 $("#scimap-loading").css({ display: "block" });
                 hexLegend.addClass("legend-hide");
                 hexLegend.removeClass("shown");
-                hexscimap01.switchDatasource(econSuppServiceBase + "/met_sums?pub_year_min=" + sliderRange[0] + "&pub_year_max=" + sliderRange[1], { update: true })
+                console.log("switching data source")
+                hexscimap01.switchDatasource(econSuppServiceBase + "/met_sums?pub_year_min=" + sliderRange[0] + "&pub_year_max=" + sliderRange[1], { update: false })
             });
             $range.ionRangeSlider({
                 min: 1959,
@@ -466,7 +469,6 @@ events.hexscimap01 = function(scope) {
                 var discArr = discString.split(", ");
                 var subdArr = subdString.split(", ");
                 discArr.forEach(function(d, i) {
-
                     var discMatch = underlyingScimapData.disciplines.data.filter(function(d1, i1) {
                         return d1.disc_name == d;
                     });
@@ -511,14 +513,15 @@ events.hexscimap01 = function(scope) {
 hexscimap01.Update = function() {
     hexscimap01.ResetVis({ empty: true })
 }
-
 dataprep.hexscimap01 = function(scope) {
+    console.log("dataprep");
     scope.filteredData.records.data.forEach(function(d, i) {
         if (d.metric_name == "Diversity of Concept") {
             d.metric_name += "s";
         }
     });
-    configs.hexscimap01.metricsFilterList = [];
+
+
     p = new Promise(function(resolve, reject) {
         var metric_descriptions;
         $.ajax({
@@ -533,6 +536,7 @@ dataprep.hexscimap01 = function(scope) {
                         configs.hexscimap01.metricsDescList.push(d);
                     }
                 })
+
                 scope.filteredData.records.data.forEach(function(d, i) {
                     var metricMatch = configs.hexscimap01.metricsDescList.filter(function(d1, i1) {
                         return d.metric_id == d1.metric_id;

@@ -14091,7 +14091,7 @@ var underlyingScimapData = {
         "subd_id2": 381,
         "subd_id1": 122
     }],
-    "disciplines": [{
+    "disciplines": [{}, {
         "disc_name": "Biology",
         "color": "#379908",
         "alt_color": -2186398,

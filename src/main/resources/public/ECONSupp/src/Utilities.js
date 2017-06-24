@@ -405,7 +405,7 @@ var Utilities = {
         })
         .y(function(d) {
             return d.y;
-        }).interpolate("bundle").tension(1),
+        }),
         // }).interpolate("basis"),
     makeDynamicScale: function(data, attr, scaleType, range) {
         var fullDomain = [];
@@ -448,6 +448,440 @@ var Utilities = {
             .range(range);
     }
 }
+
+
+        d3.selection.prototype.edgeLayout = function(context) {
+            var that = this;
+            if (!context.config.meta.edges.styleEncoding.size) context.config.meta.edges.styleEncoding.size = {range: [1, 1], scaleType: "linear", attr: "id"}
+            if (!context.config.meta.edges.styleEncoding.fill) context.config.meta.edges.styleEncoding.fill = {range: ["black", "black"], scaleType: "linear", attr: "id"}
+            if (!context.config.meta.edges.styleEncoding.stroke) context.config.meta.edges.styleEncoding.stroke = {range: ["black", "black"], scaleType: "linear", attr: "id"}
+            if (!context.config.meta.edges.styleEncoding.strokeWidth) context.config.meta.edges.styleEncoding.strokeWidth = {range: [1, 1], scaleType: "linear", attr: "id"}
+
+            var fillattr = context.config.meta.edges.styleEncoding.fill.attr;
+            var fillrange = context.config.meta.edges.styleEncoding.fill.range;
+            var fillscaleType = context.config.meta.edges.styleEncoding.fill.scaleType;
+
+            var strokeattr = context.config.meta.edges.styleEncoding.stroke.attr;
+            var strokerange = context.config.meta.edges.styleEncoding.stroke.range;
+            var strokescaleType = context.config.meta.edges.styleEncoding.stroke.scaleType;
+
+            var strokeWidthattr = context.config.meta.edges.styleEncoding.strokeWidth.attr;
+            var strokeWidthrange = context.config.meta.edges.styleEncoding.strokeWidth.range;
+            var strokeWidthscaleType = context.config.meta.edges.styleEncoding.strokeWidth.scaleType;
+
+            var sizeScale;
+            var fillScale;
+            var strokeScale;
+            var strokeWidthScale;
+
+            function compute(data) {
+                var something = that.selectAll(".wvf-edge")
+                    .data(data)
+                    .enter()
+                var somethingElse = something.append("path")
+
+                fillScale = compute.fillScale(data);
+                strokeScale = compute.strokeScale(data);
+                strokeWidthScale = compute.strokeWidthScale(data);
+
+
+
+                somethingElse.attr("fill", function(d, i) {
+                    return fillScale(d[fillattr]);
+                })
+                .attr("stroke", function(d, i) {
+                    return strokeScale(d[strokeattr]);
+                })
+                .attr("stroke-width", function(d, i) {
+                    return strokeWidthScale(d[strokeWidthattr]);
+                })
+
+                return somethingElse;
+            }
+            compute.fillScale = function(data) {
+                return d3.scale[fillscaleType]()
+                    .domain(d3.extent(data, function(d, i) {
+                        return d[fillattr];
+                    }))
+                    .range(fillrange);
+            }
+            compute.strokeScale = function(data) {
+                return d3.scale[strokescaleType]()
+                    .domain(d3.extent(data, function(d, i) {
+                        return d[strokeattr];
+                    }))
+                    .range(strokerange);
+            }
+            compute.strokeWidthScale = function(data) {
+                return d3.scale[strokeWidthscaleType]()
+                    .domain(d3.extent(data, function(d, i) {
+                        return d[strokeWidthattr];
+                    }))
+                    .range(strokeWidthrange);
+            }
+            compute.fill_range = function(v) {
+                if (!arguments.length) return fillrange;
+                fillrange = v;
+                return this;
+            }
+            compute.fill_scaleType = function(v) {
+                if (!arguments.length) return fillscaleType;
+                fillscaleType = v;
+                return this;
+            }
+            compute.fill_attr = function(v) {
+                if (!arguments.length) return fillattr;
+                fillattr = v;
+                return this;
+            }
+            compute.stroke_range = function(v) {
+                if (!arguments.length) return strokerange;
+                strokerange = v;
+                return this;
+            }
+            compute.stroke_scaleType = function(v) {
+                if (!arguments.length) return strokescaleType;
+                strokescaleType = v;
+                return this;
+            }
+            compute.stroke_attr = function(v) {
+                if (!arguments.length) return strokeattr;
+                strokeattr = v;
+                return this;
+            }
+            compute.strokeWidth_range = function(v) {
+                if (!arguments.length) return strokeWidthrange;
+                strokeWidthrange = v;
+                return this;
+            }
+            compute.strokeWidth_scaleType = function(v) {
+                if (!arguments.length) return strokeWidthscaleType;
+                strokeWidthscaleType = v;
+                return this;
+            }
+            compute.strokeWidth_attr = function(v) {
+                if (!arguments.length) return strokeWidthattr;
+                strokeWidthattr = v;
+                return this;
+            }
+            return compute;
+        }
+        d3.selection.prototype.nodeLayout = function(context) {
+            var that = this;
+            var nodeType = context.config.meta.nodes.nodeType || "circle";
+
+            if (!context.config.meta.nodes.styleEncoding.size) context.config.meta.nodes.styleEncoding.size = {range: [1, 1], scaleType: "linear", attr: "id"}
+            if (!context.config.meta.nodes.styleEncoding.fill) context.config.meta.nodes.styleEncoding.fill = {range: ["black", "black"], scaleType: "linear", attr: "id"}
+            if (!context.config.meta.nodes.styleEncoding.stroke) context.config.meta.nodes.styleEncoding.stroke = {range: ["black", "black"], scaleType: "linear", attr: "id"}
+            if (!context.config.meta.nodes.styleEncoding.strokeWidth) context.config.meta.nodes.styleEncoding.strokeWidth = {range: [1, 1], scaleType: "linear", attr: "id"}
+
+            var sizeattr = context.config.meta.nodes.styleEncoding.size.attr;
+            var sizerange = context.config.meta.nodes.styleEncoding.size.range;
+            var sizescaleType = context.config.meta.nodes.styleEncoding.size.scaleType;
+
+            var fillattr = context.config.meta.nodes.styleEncoding.fill.attr;
+            var fillrange = context.config.meta.nodes.styleEncoding.fill.range;
+            var fillscaleType = context.config.meta.nodes.styleEncoding.fill.scaleType;
+
+            var strokeattr = context.config.meta.nodes.styleEncoding.stroke.attr;
+            var strokerange = context.config.meta.nodes.styleEncoding.stroke.range;
+            var strokescaleType = context.config.meta.nodes.styleEncoding.stroke.scaleType;
+
+            var strokeWidthattr = context.config.meta.nodes.styleEncoding.strokeWidth.attr;
+            var strokeWidthrange = context.config.meta.nodes.styleEncoding.strokeWidth.range;
+            var strokeWidthscaleType = context.config.meta.nodes.styleEncoding.strokeWidth.scaleType;
+
+            var sizeScale;
+            var fillScale;
+            var strokeScale;
+            var strokeWidthScale;
+
+            var x = function(d, i) {
+                return 0;
+            }
+            var y = function(d, i) {
+                return 0;
+            }
+
+            var node = null;
+
+            function compute(data) {
+                var something = that.selectAll(".wvf-node")
+                    .data(data)
+                    .enter()
+                var somethingElse;
+                sizeScale = compute.sizeScale(data);
+                fillScale = compute.fillScale(data);
+                strokeScale = compute.strokeScale(data);
+                strokeWidthScale = compute.strokeWidthScale(data);
+
+                switch (nodeType) {
+                    case "circle":
+                        somethingElse = compute.circle(something);
+                        break;
+                    case "rect":
+                        somethingElse = compute.rect(something);
+                        break;
+                    default:
+                        somethingElse = compute.circle(something);
+                        break;
+                }
+                somethingElse.attr("fill", function(d, i) {
+                    return fillScale(d[fillattr]);
+                })
+                .attr("stroke", function(d, i) {
+                    return strokeScale(d[strokeattr]);
+                })
+                .attr("stroke-width", function(d, i) {
+                    return strokeWidthScale(d[strokeWidthattr]);
+                })
+
+                return somethingElse;
+            }
+
+            compute.sizeScale = function(data) {
+                return d3.scale[sizescaleType]()
+                    .domain(d3.extent(data, function(d, i) {
+                        return d[sizeattr];
+                    }))
+                    .range(sizerange);
+            }
+            compute.fillScale = function(data) {
+                return d3.scale[fillscaleType]()
+                    .domain(d3.extent(data, function(d, i) {
+                        return d[fillattr];
+                    }))
+                    .range(fillrange);
+            }
+            compute.strokeScale = function(data) {
+                return d3.scale[strokescaleType]()
+                    .domain(d3.extent(data, function(d, i) {
+                        return d[strokeattr];
+                    }))
+                    .range(strokerange);
+            }
+            compute.strokeWidthScale = function(data) {
+                return d3.scale[strokeWidthscaleType]()
+                    .domain(d3.extent(data, function(d, i) {
+                        return d[strokeWidthattr];
+                    }))
+                    .range(strokeWidthrange);
+            }
+
+            compute.circle = function(something) {
+                return something.append("circle")
+                    .attr("r", function(d, i) {
+                        return sizeScale(d[sizeattr])
+                    })
+                    .attr("cx", x)
+                    .attr("cy", y)
+            }
+            compute.rect = function(something) {
+                return something.append("rect")
+                    .attr("width", function(d, i) {
+                        return sizeScale(d[sizeattr])
+                    })
+                    .attr("height", function(d, i) {
+                        return sizeScale(d[sizeattr])
+                    })    
+                    .attr("x", x)
+                    .attr("y", y)
+
+            }            
+
+            compute.size_range = function(v) {
+                if (!arguments.length) return sizerange;
+                sizerange = v;
+                return this;
+            }
+            compute.size_scaleType = function(v) {
+                if (!arguments.length) return sizescaleType;
+                sizescaleType = v;
+                return this;
+            }
+            compute.size_attr = function(v) {
+                if (!arguments.length) return sizeattr;
+                sizeattr = v;
+                return this;
+            }
+            compute.fill_range = function(v) {
+                if (!arguments.length) return fillrange;
+                fillrange = v;
+                return this;
+            }
+            compute.fill_scaleType = function(v) {
+                if (!arguments.length) return fillscaleType;
+                fillscaleType = v;
+                return this;
+            }
+            compute.fill_attr = function(v) {
+                if (!arguments.length) return fillattr;
+                fillattr = v;
+                return this;
+            }
+            compute.stroke_range = function(v) {
+                if (!arguments.length) return strokerange;
+                strokerange = v;
+                return this;
+            }
+            compute.stroke_scaleType = function(v) {
+                if (!arguments.length) return strokescaleType;
+                strokescaleType = v;
+                return this;
+            }
+            compute.stroke_attr = function(v) {
+                if (!arguments.length) return strokeattr;
+                strokeattr = v;
+                return this;
+            }
+            compute.strokeWidth_range = function(v) {
+                if (!arguments.length) return strokeWidthrange;
+                strokeWidthrange = v;
+                return this;
+            }
+            compute.strokeWidth_scaleType = function(v) {
+                if (!arguments.length) return strokeWidthscaleType;
+                strokeWidthscaleType = v;
+                return this;
+            }
+            compute.strokeWidth_attr = function(v) {
+                if (!arguments.length) return strokeWidthattr;
+                strokeWidthattr = v;
+                return this;
+            }
+
+
+            compute.x = function(v) {
+                if (!arguments.length) return x;
+                x = v;
+                return this;
+            }
+            compute.y = function(v) {
+                if (!arguments.length) return y;
+                y = v;
+                return this;
+            }
+
+
+            compute.nodeType = function(v) {
+                if (!arguments.length) return nodeType;
+                var types = ["circle", "rect", "poly"];
+                if (types.indexOf(v) == -1) {
+                    throw new Exception();
+                } else {
+                    nodeType = v;
+                    return this;
+
+                }
+            }
+            return compute;
+        }
+        d3.selection.prototype.axisLayout = function(context) {
+            var that = this;
+
+            var hAxisPosition = "left";
+            var vAxisPosition = "top";
+            var hAxisDomain = [0, 1];
+            var vAxisDomain = [0, 1];
+            var hAxisTicks = 10;
+            var vAxisTicks = 10;
+            var hAxisScaleType = "linear";
+            var vAxisScaleType = "linear";
+            var hAxisTickFormat = ",.0f";
+            var vAxisTickFormat = ",.0f";
+            var offset = 50;
+            var vAxisBounds = [[offset, offset], [context.config.dims.fixedWidth - offset, context.config.dims.fixedHeight - offset]]
+            var hAxisBounds = [[offset, offset], [context.config.dims.fixedWidth - offset, context.config.dims.fixedHeight - offset]]
+
+
+            hAxisTickFormat = d3.format("");
+            vAxisTickFormat = d3.format("");
+
+            function compute(data) {                
+                var vAxisScale = d3.scale[vAxisScaleType]().domain(vAxisDomain).range([vAxisBounds[0][0] - hAxisBounds[0][0], vAxisBounds[1][0] - vAxisBounds[0][0] - hAxisBounds[0][0]])
+                var hAxisScale = d3.scale[hAxisScaleType]().domain(hAxisDomain).range([hAxisBounds[0][0] - vAxisBounds[0][0], hAxisBounds[1][0] - hAxisBounds[0][0] - vAxisBounds[0][0]])
+
+                var vAxis = d3.svg.axis()
+                    .scale(vAxisScale)
+                    .orient(vAxisPosition)
+                    .ticks(vAxis)
+                    .tickFormat(d3.format(vAxisTickFormat));
+                var hAxis = d3.svg.axis()
+                    .scale(hAxisScale)
+                    .orient(hAxisPosition)
+                    .ticks(hAxis)
+                    .tickFormat(d3.format(hAxisTickFormat));
+                var vAxisG = that.append("g")
+                    .attr("class", "axis")
+                    .attr("transform", "translate(" + vAxisBounds[0] + ")")
+                    .call(vAxis);
+                var hAxisG = that.append("g")
+                    .attr("class", "axis")
+                    .attr("transform", "translate(" + hAxisBounds[0] + ")")
+                    .call(hAxis);
+                return {
+                    vAxisScale: vAxisScale,
+                    hAxisScale: hAxisScale,
+                    vAxis: vAxis,
+                    hAxis: hAxis,
+                    vAxisG: vAxisG,
+                    hAxisG: hAxisG
+                }
+            }
+
+            compute.h_axis_position = function(v) {
+                if (!arguments.length) return hAxisPosition;
+                hAxisPosition = v;
+                return this;
+            }
+            compute.v_axis_position = function(v) {
+                if (!arguments.length) return vAxisPosition;
+                vAxisPosition = v;
+                return this;
+            }
+            compute.h_axis_domain = function(v) {
+                if (!arguments.length) return hAxisDomain;
+                hAxisDomain = v;
+                return this;   
+            }
+            compute.v_axis_domain = function(v) {
+                if (!arguments.length) return vAxisDomain;
+                vAxisDomain = v;
+                return this;   
+            }
+            compute.h_axis_ticks = function(v) {
+                if (!arguments.length) return hAxisTicks;
+                hAxisTicks = v;
+                return this;
+            }
+            compute.v_axis_ticks = function(v) {
+                if (!arguments.length) return vAxisTicks;
+                vAxisTicks = v;
+                return this;
+            }
+            compute.h_axis_tick_format = function(v) {
+                if (!arguments.length) return hAxisTickFormat;
+                hAxisTickFormat = v;
+                return this;
+            }            
+            compute.v_axis_tick_format = function(v) {
+                if (!arguments.length) return vAxisTickFormat;
+                vAxisTickFormat = v;
+                return this;
+            }
+            return compute;
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 applyIEFixes();
 /**
