@@ -1,0 +1,86 @@
+<DOCTYPE! html>
+
+    <head>
+        <meta charset=UTF-8 />
+        <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
+        <title>ECON - HexUCSDMap</title>
+        <base href="/econ-p/"> <!-- For 'permanent' version -->
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/head.js"></script>
+        <script src="src/Init.js"></script>
+        <style type="text/css">
+        #hexscimap01 {
+            width: 100%;
+            height: inherit;
+        }
+        </style>
+    </head>
+
+    <body>
+        <div layout="row" layout-wrap>
+            <div layout="column" flex="" layout-fill ng-cloak="">
+                <div layout="row" class="wrapper" layout-align="center center" ng-controller="ngCnsVisual" ng-data-attr="ng-cns-visual" ng-vis-type="HexMapOfScience" id="hexscimap01" ng-data-field="met_sums" ng-config="visuals/hexscimap01-config.js" ng-identifier="hexscimap01">
+                    <md-progress-circular progress id="scimap-loading" style="position: fixed" class="md-accent" md-mode="indeterminate"></md-progress-circular>
+                </div>
+                <div class="hex-legend default" ng-include="'partials/hex-legend.html'"></div>
+                <!-- <div ng-include="'partials/hex-legend.html'"></div> -->
+            </div>
+            <div class="leftsidenav" data-ng-controller="SideNavCtrl" layout="column" style="height:100%;" ng-cloak="">
+                <section layout="row" flex="">
+                    <md-sidenav class="md-sidenav-right md-primary" md-component-id="right" md-is-locked-open="$mdMedia('gt-md')" md-disable-backdrop="" md-whiteframe="4">
+                        <md-toolbar md-scroll-shrink>
+                            <div class="md-toolbar-tools">
+                                <h1>HITS Metrics Visualization</h1>
+                                <md-button ng-controller="AboutCtrl" class="md-fab md-small" aria-label="About" ng-click="showHexscimapAbout($event)">
+                                    <md-icon md-svg-src="img/icons/cns_question.svg"></md-icon>
+                                </md-button>
+                            </div>
+                        </md-toolbar>
+                        <div class="md-padding" ng-cloak>
+                            <div>
+                                <fieldset class="demo-fieldset">
+                                    <legend class="demo-legend">Search</legend>
+                                    <div class="awesomplete">
+                                        <input class="disc-input awesomplete-input" autocomplete="off" aria-autocomplete="list" data-multiple placeholder="Disciplines">
+                                    </div>
+                                    <div class="awesomplete">
+                                        <input class="subd-input awesomplete-input" autocomplete="off" aria-autocomplete="list" data-multiple placeholder="Subdisciplines">
+                                        <md-button class="submit-btn md-raised" id="awesomplete-search-btn">Ping</md-button>
+                                        <md-button class="submit-btn md-raised" id="awesomeplete-clear-btn">Stop</md-button>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div id="sliderForm">
+                            <div class="md-padding" ng-cloak>
+                                <div>
+                                    <fieldset class="demo-fieldset">
+                                        <legend class="demo-legend">Selected Subdiscipline List</legend>
+                                        <span id="selected-subd"></span>
+                                        <ul id="selected-subd-list">
+                                        </ul>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-controller="CheckboxCtrl" id="metricForm0" ng-title="Metrics" ng-include="template.url"></div>
+                        <div id="sliderForm">
+                            <div class="md-padding" ng-cloak>
+                                <div>
+                                    <fieldset class="demo-fieldset">
+                                        <legend class="demo-legend">Time Slider</legend>
+                                        <div class="style-slider">
+                                            <input style="" type="text" id="range" name="range" value="" />
+                                            <md-button id="filter-btn" class="submit-btn md-raised"> Filter </md-button>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </md-sidenav>
+                </section>
+            </div>
+        </div>
+    </body>
+
+    </html>
