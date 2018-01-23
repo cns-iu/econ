@@ -9,6 +9,10 @@ class UrlMappings {
             }
         }
 
+
+        "/ECONSupp/ucsdmap"(redirect:[url:'http://cns.iu.edu/econ-p/ucsdmap.html'])
+        "/ECONSupp/hexmap"(redirect:[url:'http://cns.iu.edu/econ-p/hexmap.html'])
+        
         "/econ-ucsdmap"(redirect:'/ECONSupp/ucsdmap.html')
         "/econ-hexmap"(redirect:'/ECONSupp/hexmap.html')
         "/econ-admin"(redirect:'/ECONSupp-admin/index.html')
@@ -22,6 +26,6 @@ class UrlMappings {
         "/metric_update"(controller: "metric_update")
         "/compute_derived"(controller: "ComputeDerived")
 
-        
+
     }
 }
