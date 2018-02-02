@@ -8,12 +8,17 @@ class Medline_master {
 	String article_title
 	Integer pub_year
 	String pmid
+	String journal_nlmuniqueid
 
 	static mapping = {
 		version false
 		datasource 'admin'
+		table name: 'medline_master', schema: 'public'
+
+		pmid index: 'medline_master_pmid_idx'
+		pub_year index: 'medline_master_pubyr_idx'
 	}
 
-    static constraints = {
-    }
+  static constraints = {
+  }
 }

@@ -114,7 +114,7 @@ events.hexscimap01 = function(scope) {
         function generateScales(attr, range) {
             var metricScales = {};
 
-            //Returns object with sub-objects of each possible metric. 
+            //Returns object with sub-objects of each possible metric.
             hexscimap01.configs.metricsFilterList.forEach(function(d, i) {
                 metricScales[d] = {
                     min: Number.POSITIVE_INFINITY,
@@ -128,14 +128,14 @@ events.hexscimap01 = function(scope) {
                 }
             })
 
-            //For each subdiscipline, aggregate the entries by each metric. 
+            //For each subdiscipline, aggregate the entries by each metric.
             hexscimap01.nestedData.sub_disc.forEach(function(d, i) {
                 d.nestedMetrics = d3.nest()
                     .key(function(d1) {
                         return d1[hexscimap01.configs.metricsFilter]
                     })
                     .entries(d.values.children);
-                //For each aggregated metric of a subdiscipline, compare the average of all values to the global min/max values for the metric aggregates. 
+                //For each aggregated metric of a subdiscipline, compare the average of all values to the global min/max values for the metric aggregates.
 
                 d.values.metrics.forEach(function(d1, i1) {
                     var currScaleObj = metricScales[d1.key];
@@ -144,7 +144,7 @@ events.hexscimap01 = function(scope) {
                 })
             });
 
-            //For each possible metric, create a scale using the minimum and maximum. 
+            //For each possible metric, create a scale using the minimum and maximum.
             Object.keys(metricScales).forEach(function(d, i) {
                 metricScales[d].setScale(range);
             })
@@ -262,52 +262,48 @@ events.hexscimap01 = function(scope) {
                         metric_idList.push(configs.hexscimap01.metricsDescList.filter(function(d2, i2) {
                             return d1 == d2.metric_name;
                         })[0])
-                    })
+                    });
 
-                    metric_idList.forEach(function(d1, i1) {
-                        $.ajax({
-                            type: 'GET',
-                            url: econSuppServiceBase + '/journal_list?computed_rank=20&subd_id=' + d.subd_data.subd_id + '&metric_id=' + d1.metric_id + '&limit=20' + '&pub_year_min=' + sliderRange[0] + '&pub_year_max=' + sliderRange[1],
-                            success: function(res) {
-                                if (res.records.data.length > 0) {
-                                    $("#hex-legend-table-progress").css("display", "none");
-                                    $("#hex-legend-table").css("display", "block");
+                    var metric_ids = metric_idList.map(function(d) { return d.metric_id; });
+                    $.ajax({
+                        type: 'GET',
+                        url: econSuppServiceBase + '/journal_list?computed_rank=20&subd_id=' + d.subd_data.subd_id + '&metric_id=' + metric_ids.join(',') + '&limit=20' + '&pub_year_min=' + sliderRange[0] + '&pub_year_max=' + sliderRange[1],
+                        success: function(res) {
+                            if (res.records.data.length > 0) {
+                              $("#hex-legend-table-progress").css("display", "none");
+                              $("#hex-legend-table").css("display", "block");
 
-                                    angular.element($("#hex-legend-table-container")).scope().addTableData(res.records.data);
-                                    $("#hex-legend-table-progress").css("display", "none");
-                                    $("#hex-legend-table").css("display", "block");
+                              angular.element($("#hex-legend-table-container")).scope().addTableData(res.records.data);
+                              $("#hex-legend-table-progress").css("display", "none");
+                              $("#hex-legend-table").css("display", "block");
+                              angular.element($("#hex-legend-table-container")).scope().sortTableData(function(data) {
+                                  return data.sort(
+                                      firstBy(function(v1, v2) {
+                                          return v1.pub_year - v2.pub_year
+                                      })
+                                      .thenBy(function(v1, v2) {
+                                          return v1.first_name - v2.first_name
+                                      })
+                                      .thenBy(function(v1, v2) {
+                                          return v1.article_title - v2.article_title
+                                      })
+                                      .thenBy(function(v1, v2) {
+                                          return v1.pmid - v2.pmid
+                                      })
+                                  )
 
-                                    if (i1 == metric_idList.length - 1) {
-                                        angular.element($("#hex-legend-table-container")).scope().sortTableData(function(data) {
-                                            return data.sort(
-                                                firstBy(function(v1, v2) {
-                                                    return v1.pub_year - v2.pub_year
-                                                })
-                                                .thenBy(function(v1, v2) {
-                                                    return v1.first_name - v2.first_name
-                                                })
-                                                .thenBy(function(v1, v2) {
-                                                    return v1.article_title - v2.article_title
-                                                })
-                                                .thenBy(function(v1, v2) {
-                                                    return v1.pmid - v2.pmid
-                                                })
-                                            )
+                              });
 
-                                        });
-
-                                        angular.element($("#hex-legend-table-container")).scope().$apply();
-                                    }
-                                } else {
-                                    // $("#hex-legend-table-no-records").css("display", "block");
-                                    $("#hex-legend-table-progress").css("display", "none");
-                                    $("#hex-legend-table").css("display", "none");
-                                }
-                            },
-                            error: function(err) {
-                                console.log(err);
+                              angular.element($("#hex-legend-table-container")).scope().$apply();
+                            } else {
+                                // $("#hex-legend-table-no-records").css("display", "block");
+                                $("#hex-legend-table-progress").css("display", "none");
+                                $("#hex-legend-table").css("display", "none");
                             }
-                        });
+                        },
+                        error: function(err) {
+                            console.log(err);
+                        }
                     });
                 }
             });
@@ -322,7 +318,6 @@ events.hexscimap01 = function(scope) {
                     underlyingScimapData.edges.data.filter(function(d1, i1) {
                         return d1.source == d.subd_data.subd_id
                     }).forEach(function(d2, i2) {
-                        console.log(d2);
                         if (uniqueRelList.indexOf(d2.target)) {
                             uniqueRelList.push(d2.target);
                         }
@@ -346,7 +341,6 @@ events.hexscimap01 = function(scope) {
                     })
 
                     nodeList.forEach(function(d1, i1) {
-                        console.log(d1)
                         var li = $("<li class='sel_subd_list did" + d1.disc_data.disc_id + "'></li>").text(d1.subd_name) //.css({color: d1.disc_data.color})
                         $("#selected-subd-list").append(li);
                     })

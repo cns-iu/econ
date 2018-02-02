@@ -18,10 +18,14 @@ class Medline_author {
 
 	static mapping = {
 		datasource 'admin'
+		table name: 'medline_author', schema: 'public'
+
+		id index: 'medline_author_id_idx'
+		pmid index: 'medline_author_pmid_idx'
 	}
 
-    static constraints = {
-    	version false
+  static constraints = {
+  	version false
 		id insert: 'false', update: 'false'
-    }
+  }
 }

@@ -3,7 +3,7 @@ visualizationFunctions.LegendNodeSize = function(element, data, opts) {
     context.config = context.CreateBaseConfig();
     // context.SVG = context.config.easySVG(element[0])
     context.VisFunc = function() {
-        
+
         // var data = [4, 20];
         // var extent = d3.extent(data);
 
@@ -76,9 +76,7 @@ visualizationFunctions.LegendNodeSize = function(element, data, opts) {
                 return context.SVG.selectAll("#midNode");
             }
             context.getMinNode = function() {
-                console.log(context.SVG.selectAll("#minNode"));
                 return context.SVG.selectAll("#minNode");
-
             }
 
             context.setTitle = function(text) {
@@ -104,7 +102,7 @@ visualizationFunctions.LegendNodeSize = function(element, data, opts) {
             // context.setNodeSizes([4, 64])
         });
 
-        context.updateNodeSize = function(arr) {          
+        context.updateNodeSize = function(arr) {
             var minNode = context.getMinNode();
             var midNode = context.getMidNode();
             var minNodeSize = (64 * arr[0]) / arr[1];
@@ -113,7 +111,7 @@ visualizationFunctions.LegendNodeSize = function(element, data, opts) {
             minNode
                 .attr("r", minNodeSize)
                 .attr("cy", 174 - minNodeSize)
-            
+
             midNode
                 .attr("r", midNodeSize)
                 .attr("cy", 174 - midNodeSize)

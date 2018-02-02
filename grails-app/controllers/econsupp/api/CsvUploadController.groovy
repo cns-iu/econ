@@ -8,7 +8,7 @@ import org.hibernate.*
 
 class CsvUploadController {
 	def sessionFactory
-    def index() { 
+    def index() {
 		def file = request.getFile("file")
     	def inStream = file.inputStream
 
@@ -34,7 +34,7 @@ class CsvUploadController {
 				def pmid = line[0]
 				def metric = line[1]
 				Supp_metric_data dom = new Supp_metric_data(["pmid": line[0], "metric": line[1], "metric_id": params.int("metric_id")])
-				if (dom.hasErrors() || dom.save(flush: true) == null) {
+				if (dom.hasErrors() || dom.save() == null) {
 					errors++;
 					if (firstError == -1) {
 						firstError = i;
@@ -44,6 +44,7 @@ class CsvUploadController {
 			i += 1
 		}
 
+		sessionFactory.currentSession.flush()
 
 		obj['totalrecords'] = i
 		obj['numerrors'] = errors
@@ -56,7 +57,7 @@ class CsvUploadController {
 
 // class CsvtestController {
 // 	def sessionFactory
-//     def index() { 
+//     def index() {
 // 		def reqPart = request.getFile("csv")
 //     	def inStream = reqPart.inputStream
 // 		// StatelessSession session = sessionFactory.openStatelessSession()

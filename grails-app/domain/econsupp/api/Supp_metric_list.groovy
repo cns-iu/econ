@@ -10,12 +10,14 @@ class Supp_metric_list {
 	Boolean display
 
 	static mapping = {
-		datasource 'admin'		
+		datasource 'admin'
 		version false
 		table 'supp_metric_list'
 		id name: 'metric_id', column: 'metric_id', generator: 'assigned', type: 'Integer', insert: 'false', update: 'false'
+
+		metric_id index: 'supp_metric_list_metricid_idx'
 	}
 
-    static constraints = {
-    }
+  static constraints = {
+  }
 }

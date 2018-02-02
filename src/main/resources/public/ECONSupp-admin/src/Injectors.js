@@ -266,7 +266,7 @@ app.controller('tableCtrl', ['$scope', '$mdDialog', '$http', function(scope, $md
     scope.putData = function(selected) {
         $http({
             //TODO: Fix
-            url: econSuppServiceBase + "/api/supp_metric_list/" + selected.metric_id,
+            url: econSuppServiceBase + "/supp_metric_list/" + selected.metric_id,
             method: "PUT",
             params: {
                 metric_name: selected.metric_name,
@@ -318,7 +318,7 @@ app.controller('tableCtrl', ['$scope', '$mdDialog', '$http', function(scope, $md
 
     scope.getData = function() {
         $http({
-            url: econSuppServiceBase + "/api/supp_metric_list",
+            url: econSuppServiceBase + "/supp_metric_list",
             method: "GET",
             // params: {}
         }).then(function(res) {

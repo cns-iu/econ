@@ -8,7 +8,7 @@ class Met_sumsController {
     def index() {
 		def obj = [:]
 		obj['records'] = [:]
-		obj['records']['schema'] = [ 
+		obj['records']['schema'] = [
 			["name": "subd_id", "type": "numeric"],
 			["name": "pub_year", "type": "numeric"],
 			// ["name": "metric_name", "type": "string"],
@@ -25,18 +25,25 @@ class Met_sumsController {
 		if (params.int("pub_year_max")) {
 			maxYear = params.int("pub_year_max")
 		}
-		def data = Metric_sums.createCriteria().list {
-			between("pub_year", minYear, maxYear)
-			'in'('metric_id', (Supp_metric_list.createCriteria().list {
-				eq("display", true)
-			}).metric_id)
-		}
-		obj['records']['data'] = data
+    def metrics = Supp_metric_list.createCriteria().list {
+      eq("display", true)
+    };
+    if (metrics) {
+  		def data = Metric_sums.createCriteria().list {
+  			between("pub_year", minYear, maxYear)
+  			'in'('metric_id', (Supp_metric_list.createCriteria().list {
+          eq("display", true)
+        }).metric_id)
+  		}
+  		obj['records']['data'] = data
+    } else {
+      obj['records']['data'] = [];
+    }
 		// obj['records']['data'] = Metric_sums.list(params);
 		render obj as JSON
 
-        // def session = sessionFactory.currentSession 
-        // session.flush() 
-        // session.clear() 
+        // def session = sessionFactory.currentSession
+        // session.flush()
+        // session.clear()
     }
 }
