@@ -1,4 +1,4 @@
-head.js("http://d3js.org/d3.hexbin.v0.min.js");
+head.js("https://d3js.org/d3.hexbin.v0.min.js");
 head.js("visuals/HexMapOfScience/HexMapOfScience/underlyingScimapData.js");
 head.js('visuals/HexMapOfScience/HexMapOfScience/disc_lookup.js')
 
